@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ModalController, AlertController, ToastController, LoadingController } from '@ionic/angular';
 import { UsuarioService } from 'src/app/usuario/services/usuario.service';
 import { UsuarioInterface } from 'src/app/usuario/types/usuario.interface';
+import { UsuarioCadastroComponent } from '../../cadastro/usuario-cadastro.component';
 
 @Component({
   selector: 'app-usuario-lista',
@@ -23,13 +24,13 @@ export class UsuarioListaComponent implements OnInit {
     private modalCtrl: ModalController,) {}
      
   ngOnInit(): void {
-    this.findAll();
+    this.readUsuarios();
   }
 
-  async findAll() {
+  async readUsuarios() {
     const busyLoader = await this.loadingController.create({ spinner: 'circular' })
     busyLoader.present()
-    const subscription = this.usuarioService.findAll()
+    const subscription = this.usuarioService.readUsuarios()
       .subscribe(async (usuarios) => {
         window.localStorage.setItem('usuarios', JSON.stringify(usuarios));
         this.usuarios = usuarios;
@@ -54,9 +55,9 @@ export class UsuarioListaComponent implements OnInit {
     this.subscriptions.add(subscription);
   }
 
-  async openModal(usuario: null | usuarioInterface) {
+  async openModal(usuario: null | UsuarioInterface) {
     const modal = await this.modalCtrl.create({
-      component: usuarioCadastroComponent,
+      component: UsuarioCadastroComponent,
       componentProps: {
         usuario
       }
@@ -66,11 +67,7 @@ export class UsuarioListaComponent implements OnInit {
     const { data, role } = await modal.onWillDismiss();
 
     if (role === 'confirm') {
-      this.findAll();
+      this.readUsuarios();
     }
   }
-
-
-
-  
 }

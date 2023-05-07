@@ -1,13 +1,30 @@
-<h1 class="mt-3">Usuários</h1>
-<hr>
-<ol>
-    <li *ngFor="let usuario of usuarios">
-        <p>
-          {{usuario.nome}}
-        </p>
-        <p>
-<!--             <button class="btn btn-warning" [routerLink]="['/edicao', usuario.id]">Editar</button>
-            <button class="btn btn-danger ms-1" (click)="remove(usuario)">Excluir</button> -->
-        </p>
-    </li>
-</ol>
+<ion-header>
+    <ion-toolbar>
+      <ion-title>Usuarios</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content class="ion-padding">
+    <ion-card *ngFor="let usuarios of usuarios" (click)="openModal(usuario)" class="ion-activatable ripple-parent rounded-rectangle">
+      <ion-ripple-effect></ion-ripple-effect>
+      <ion-card-header>
+        <ion-card-title>{{usuario.nome}}</ion-card-title>
+        <ion-card-subtitle>Nascido em: {{usuario.nascimento | date: 'dd/MM/yyyy' }}</ion-card-subtitle>
+      </ion-card-header>
+    
+      <ion-card-content>
+        <ion-text color="tertiary">
+          <p>CPF: {{usuario.cpf}}</p>
+        </ion-text>
+        <ion-text color="tertiary">
+          <p>RG: {{usuario.rg}}</p>
+        </ion-text>
+      </ion-card-content>
+    </ion-card>
+  
+    <ion-fab vertical="bottom" horizontal="end">
+      <ion-fab-button (click)="openModal(null)">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </ion-content>
