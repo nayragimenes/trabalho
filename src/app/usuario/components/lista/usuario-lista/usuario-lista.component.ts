@@ -1,33 +1,76 @@
-import { Component, OnInit } from '@angular/core';
-import { UsuarioInterface } from '../../../types/usuario.interface';
-import { UsuarioService } from '../../../services/usuario.service';
+import { Component, Input, NgModule, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ModalController, AlertController, ToastController, LoadingController } from '@ionic/angular';
+import { UsuarioService } from 'src/app/usuario/services/usuario.service';
+import { UsuarioInterface } from 'src/app/usuario/types/usuario.interface';
 
 @Component({
   selector: 'app-usuario-lista',
   templateUrl: './usuario-lista.component.html',
 })
-export class UsuarioListaComponent  implements OnInit {
+
+export class UsuarioListaComponent implements OnInit {
+
   usuarios: UsuarioInterface[] = [];
-
-  constructor(private usuarioService: UsuarioService) { 
-
+  subscriptions = new Subscription();
+  
+  constructor(
+    private usuarioService: UsuarioService,
+    private loadingController: LoadingController,
+    private alertController: AlertController,
+    private toastController: ToastController,
+    private modalCtrl: ModalController,) {}
+     
+  ngOnInit(): void {
+    this.findAll();
   }
 
-  ngOnInit() {
-    this.list();
-  }
-
-  list() {
-    this.usuarioService.readUsuarios().subscribe(
-      (usuarios) => {
+  async findAll() {
+    const busyLoader = await this.loadingController.create({ spinner: 'circular' })
+    busyLoader.present()
+    const subscription = this.usuarioService.findAll()
+      .subscribe(async (usuarios) => {
+        window.localStorage.setItem('usuarios', JSON.stringify(usuarios));
         this.usuarios = usuarios;
-      },
-      (erro) => {
-        console.log('Erro: ', erro);
-      },
-      () => {
-        console.log('Terminou!');
-      }
-    );
+        const toast = await this.toastController.create({
+          color: 'success',
+          position: 'top',
+          message: 'Lista de usuarios carregada com sucesso!',
+          duration: 1500,
+          buttons: ['X']
+        })
+        toast.present()
+        busyLoader.dismiss();
+      }, async () => {
+        const alerta = await this.alertController.create({
+          header: 'Erro',
+          message: 'Não foi possível carregar a lista de usuarios',
+          buttons: ['Ok']
+        })
+        alerta.present()
+        busyLoader.dismiss();
+      });
+    this.subscriptions.add(subscription);
   }
+
+  async openModal(usuario: null | usuarioInterface) {
+    const modal = await this.modalCtrl.create({
+      component: usuarioCadastroComponent,
+      componentProps: {
+        usuario
+      }
+    });
+    modal.present();
+
+    const { data, role } = await modal.onWillDismiss();
+
+    if (role === 'confirm') {
+      this.findAll();
+    }
+  }
+
+
+
+  
 }

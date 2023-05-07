@@ -9,12 +9,12 @@ export class DespesaService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getDespesa(id: number): Observable<DespesaInterface> {
+  readDespesa(id: number): Observable<DespesaInterface> {
     return this.httpClient.get<DespesaInterface>(
       `${environment.apiUrl}/despesas/${id}`
     )
   }
-  getDespesas(): Observable<DespesaInterface[]> {
+  readDespesas(): Observable<DespesaInterface[]> {
     return this.httpClient.get<DespesaInterface[]>(
       `${environment.apiUrl}/despesas`
     );
@@ -27,14 +27,14 @@ export class DespesaService {
     )
   }
 
-  save(despesa: DespesaInterface): Observable<DespesaInterface> {
+  create(despesa: DespesaInterface): Observable<DespesaInterface> {
     return this.httpClient.post<DespesaInterface>(
       `${environment.apiUrl}/despesas`,
       despesa
     );
   }
 
-  remove(despesa: DespesaInterface): Observable<void> {
+  delete(despesa: DespesaInterface): Observable<void> {
     return this.httpClient.delete<void>(
       `${environment.apiUrl}/despesas/${despesa.id}`
     );

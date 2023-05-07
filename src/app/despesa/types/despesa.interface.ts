@@ -2,7 +2,7 @@ import { UsuarioInterface } from "src/app/usuario/types/usuario.interface";
 import { Categoria } from "./categoria.enum";
 
 export interface DespesaInterface {
-    id: number;
+    id: string;
     descricao: string,
     categoria: Categoria,
     data: Date,
