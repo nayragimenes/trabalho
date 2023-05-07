@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UsuarioInterface } from '../../usuario.interface';
-import { UsuarioService } from '../../usuario.service';
+import { UsuarioInterface } from '../../../types/usuario.interface';
+import { UsuarioService } from '../../../services/usuario.service';
 
 @Component({
   selector: 'app-usuario-lista',
@@ -18,22 +18,10 @@ export class UsuarioListaComponent  implements OnInit {
   }
 
   list() {
-    this.usuarioService.getUsuarios().subscribe(
+    this.usuarioService.readUsuarios().subscribe(
       (usuarios) => {
         this.usuarios = usuarios;
       },
-      (erro) => {
-        console.log('Erro: ', erro);
-      },
-      () => {
-        console.log('Terminou!');
-      }
-    );
-  }
-
-  remove(usuario: UsuarioInterface) {
-    this.usuarioService.remove(usuario).subscribe(
-      () => this.list(),
       (erro) => {
         console.log('Erro: ', erro);
       },
