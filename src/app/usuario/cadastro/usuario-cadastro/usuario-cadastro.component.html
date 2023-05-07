@@ -1,0 +1,135 @@
+
+
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      {{createMode ? 'Cadastro ' : 'Edição ' }} de Usuario
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+  <form [formGroup]="usuarioForm">
+    <ion-list>
+
+
+      <ion-item>
+        <ion-label position="floating">Nome:</ion-label>
+        <ion-input formControlName="nome" placeholder="Digite o nome do usuario"></ion-input>
+        <ion-note slot="error" *ngIf="usuarioForm.controls['nome'].hasError('required')">
+          O campo é obrigatório
+        </ion-note>
+        <ion-note slot="error" *ngIf="usuarioForm.controls['nome'].hasError('minlength')">
+          O campo tem {{usuarioForm.controls['nome'].errors?.['minlength'].actualLength}} caracteres, entretanto deve
+          ter no mínimo {{usuarioForm.controls['nome'].errors?.['minlength'].requiredLength}} caracteres
+        </ion-note>
+        <ion-note slot="error" *ngIf="usuarioForm.controls['nome'].hasError('maxlength')">
+          O campo deve ter no máximo {{usuarioForm.controls['nome'].errors?.['maxlength'].requiredLength}} caracteres
+        </ion-note>
+        <ion-note slot="error" *ngIf="usuarioForm.controls['nome'].hasError('invalidName')">
+          O nome do autor não pode conter o trecho de caracteres:
+          <strong>{{usuarioForm.controls['nome'].errors?.['invalidName']}}</strong>
+        </ion-note>
+        <pre>{{usuarioForm.controls['nome'].errors | json}}</pre>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-label position="floating">Apelido:</ion-label>
+        <ion-input formControlName="apelido" placeholder="Digite o apelido"></ion-input>
+        <ion-note slot="error" *ngIf="usuarioForm.controls['apelido'].hasError('required')">
+          O campo é obrigatório
+        </ion-note>
+        <ion-note slot="error" *ngIf="usuarioForm.controls['apelido'].hasError('minlength')">
+          O campo tem {{usuarioForm.controls['apelido'].errors?.['minlength'].actualLength}} caracteres, entretanto deve
+          ter no mínimo {{usuarioForm.controls['apelido'].errors?.['minlength'].requiredLength}} caracteres
+        </ion-note>
+        <ion-note slot="error" *ngIf="usuarioForm.controls['apelido'].hasError('maxlength')">
+          O campo deve ter no máximo {{usuarioForm.controls['apelido'].errors?.['maxlength'].requiredLength}} caracteres
+        </ion-note>
+        <ion-note slot="error" *ngIf="usuarioForm.controls['apelido'].hasError('invalidName')">
+          O apelido do autor não pode conter o trecho de caracteres:
+          <strong>{{usuarioForm.controls['apelido'].errors?.['invalidName']}}</strong>
+        </ion-note>
+        <pre>{{usuarioForm.controls['apelido'].errors | json}}</pre>
+      </ion-item>
+
+
+
+      <ion-item>
+        <ion-label position="floating">email:</ion-label>
+        <ion-input formControlName="email" placeholder="Digite o apelido"></ion-input>
+        <ion-note slot="error" *ngIf="usuarioForm.controls['email'].hasError('required')">
+          O campo é obrigatório
+        </ion-note>
+        <ion-note slot="error" *ngIf="usuarioForm.controls['email'].hasError('minlength')">
+          O campo tem {{usuarioForm.controls['email'].errors?.['minlength'].actualLength}} caracteres, entretanto deve
+          ter no mínimo {{usuarioForm.controls['email'].errors?.['minlength'].requiredLength}} caracteres
+        </ion-note>
+        <ion-note slot="error" *ngIf="usuarioForm.controls['email'].hasError('maxlength')">
+          O campo deve ter no máximo {{usuarioForm.controls['email'].errors?.['maxlength'].requiredLength}} caracteres
+        </ion-note>
+        <ion-note slot="error" *ngIf="usuarioForm.controls['email'].hasError('invalidName')">
+          O apelido do autor não pode conter o trecho de caracteres:
+          <strong>{{usuarioForm.controls['email'].errors?.['invalidName']}}</strong>
+        </ion-note>
+        <pre>{{usuarioForm.controls['email'].errors | json}}</pre>
+      </ion-item>
+
+
+
+
+
+      <ion-item>
+        <ion-label> Data de nascimento </ion-label>
+        <ion-datetime-button datetime="nascimento"></ion-datetime-button>
+        <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime formControlName="nascimento" id="nascimento" presentation="date" showDefaultButtons="true"
+              doneText="Selecionar" cancelText="Cancelar" showDefaultTitle="true">
+              <span slot="title">Selecione a data de Nascimento</span>
+            </ion-datetime>
+          </ng-template>
+        </ion-modal>
+      </ion-item>
+
+
+
+      <ion-item>
+        <ion-label>Gênero</ion-label>
+        <ion-select formControlName="genero" placeholder="Selecione o gênero">
+          <ion-select-option value="F">Feminino</ion-select-option>
+          <ion-select-option value="M">Masculino</ion-select-option>
+          <ion-select-option value="O">Outro</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
+
+    <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+      <ion-fab-button (click)="save()" [disabled]="usuarioForm.invalid">
+        <ion-icon name="checkmark"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+
+
+
+    <ion-fab horizontal="start" vertical="bottom" slot="fixed">
+      <ion-fab-button color="light" (click)="cancel()">
+        <ion-icon name="close"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+
+
+  </form>
+
+
+</ion-content>
+
+<ion-footer></ion-footer> 
+
