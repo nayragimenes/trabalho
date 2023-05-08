@@ -92,11 +92,11 @@ export class DespesaCadastroComponent  implements OnInit {
   }
 
 
-  deleteDespesa(despesa: string): void {
+  deleteDespesa(despesaId: string): void {
     this.subscriptions.add(
-      this.despesaService.delete(despesa).subscribe(
+      this.despesaService.delete(despesaId).subscribe(
         () => {
-          this.modalCtrl.dismiss(despesa, 'confirm');
+          this.modalCtrl.dismiss(despesaId, 'confirm');
         },
         async () => {
           const alerta = await this.alertController.create({
@@ -108,5 +108,5 @@ export class DespesaCadastroComponent  implements OnInit {
         }
       )
     )
-  }  
+  } 
 }

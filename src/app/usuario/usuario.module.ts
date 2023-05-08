@@ -7,6 +7,7 @@ import { UsuarioService } from './services/usuario.service';
 import { NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { UsuarioCadastroComponent } from './components/cadastro/usuario-cadastro.component';
+import { UsuarioListaComponent } from './components/lista/usuario-lista/usuario-lista.component';
 
 
 @NgModule({
@@ -18,7 +19,7 @@ import { UsuarioCadastroComponent } from './components/cadastro/usuario-cadastro
     ReactiveFormsModule, 
     UsuarioRoutingModule
   ],
-  declarations: [UsuarioCadastroComponent],
+  declarations: [UsuarioCadastroComponent, UsuarioListaComponent],
   providers: [UsuarioService]
 
 })

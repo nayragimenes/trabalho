@@ -34,9 +34,7 @@ export class DespesaService {
     );
   }
 
-  delete(despesa: DespesaInterface): Observable<void> {
-    return this.httpClient.delete<void>(
-      `${environment.apiUrl}/despesas/${despesa.id}`
-    );
+  delete(id: String): Observable<DespesaInterface> {
+    return this.httpClient.delete<DespesaInterface>(`${environment.apiUrl}/despesas/${id}`);
   }
 }

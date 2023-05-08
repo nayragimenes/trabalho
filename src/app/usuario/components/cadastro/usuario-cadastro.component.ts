@@ -86,6 +86,7 @@ export class UsuarioCadastroComponent implements OnInit {
   }
 
 
+  
   deleteUsuario(usuarioId: string): void {
     this.subscriptions.add(
       this.usuarioService.delete(usuarioId).subscribe(

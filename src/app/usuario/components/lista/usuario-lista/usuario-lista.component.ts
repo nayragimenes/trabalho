@@ -1,6 +1,5 @@
-import { Component, Input, NgModule, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ModalController, AlertController, ToastController, LoadingController } from '@ionic/angular';
 import { UsuarioService } from 'src/app/usuario/services/usuario.service';
 import { UsuarioInterface } from 'src/app/usuario/types/usuario.interface';
