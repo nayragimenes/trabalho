@@ -1,16 +1,20 @@
 import { NgModule } from '@angular/core';
 import { Route, RouterModule } from '@angular/router';
-import { UsuarioListaComponent } from './components/lista/usuario-lista/usuario-lista.component';
 import { UsuarioCadastroComponent } from './components/cadastro/usuario-cadastro.component';
+import { UsuarioListaComponent } from './components/lista/usuario-lista/usuario-lista.component';
 
 const routes: Route[] = [
   {
     path: '',
-    redirectTo: 'usuarios',
+    redirectTo: 'cadastro',
     pathMatch: 'full'
   },
   {
-    path: 'usuarios',
+    path: 'lista',
+    component: UsuarioListaComponent,
+  },
+  {
+    path: 'cadastro',
     component: UsuarioCadastroComponent,
   }
 ]

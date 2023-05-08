@@ -5,17 +5,13 @@ import { DespesaCadastroComponent } from './components/cadastro/despesa-cadastro
 const routes: Route[] = [
   {
     path: '',
-    redirectTo: 'despesas',
+    redirectTo: 'cadastro',
     pathMatch: 'full'
   },
   {
-    path: 'despesas',
+    path: 'cadastro',
     component: DespesaCadastroComponent,
-  },
-  {
-    path: 'despesas',
-    component: DespesaCadastroComponent,
-  },
+  }
 
 ]
 

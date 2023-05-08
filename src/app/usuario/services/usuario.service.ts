@@ -13,23 +13,23 @@ export class UsuarioService{
     constructor(private http: HttpClient) { }
 
     readUsuario(id: number): Observable<UsuarioInterface>{
-        return this.http.get<UsuarioInterface>(`${environment.apiUrl}/usuarios/${id}`);
+        return this.http.get<UsuarioInterface>(`${environment.apiUrl}/usuario/${id}`);
     }
 
     readUsuarios(): Observable<UsuarioInterface[]> {
-        return this.http.get<UsuarioInterface[]>(`${environment.apiUrl}/usuarios`);
+        return this.http.get<UsuarioInterface[]>(`${environment.apiUrl}/usuario`);
     }
 
     create(usuario: UsuarioInterface): Observable<UsuarioInterface> {
-        return this.http.post<UsuarioInterface>(`${environment.apiUrl}/usuarios`, usuario);
+        return this.http.post<UsuarioInterface>(`${environment.apiUrl}/usuario`, usuario);
     }
 
     update(usuario: UsuarioInterface): Observable<UsuarioInterface> {
-        return this.http.put<UsuarioInterface>(`${environment.apiUrl}/usuarios/${usuario.id}`, usuario);
+        return this.http.put<UsuarioInterface>(`${environment.apiUrl}/usuario/${usuario.id}`, usuario);
     }
 
-    delete(id: String): Observable<UsuarioInterface> {
-        return this.http.delete<UsuarioInterface>(`${environment.apiUrl}/usuarios/${id}`);
-      }
+    delete({id}: UsuarioInterface):Observable<void> {
+        return this.http.delete<void>(`${environment.apiUrl}/usuario/${id}`);
+    }
 
 }

@@ -10,31 +10,22 @@ export class DespesaService {
   constructor(private httpClient: HttpClient) { }
 
   readDespesa(id: number): Observable<DespesaInterface> {
-    return this.httpClient.get<DespesaInterface>(
-      `${environment.apiUrl}/despesas/${id}`
-    )
+    return this.httpClient.get<DespesaInterface>(`${environment.apiUrl}/despesa/${id}`);
   }
+
   readDespesas(): Observable<DespesaInterface[]> {
-    return this.httpClient.get<DespesaInterface[]>(
-      `${environment.apiUrl}/despesas`
-    );
+    return this.httpClient.get<DespesaInterface[]>(`${environment.apiUrl}/despesa`);
   }
 
   update(despesa: DespesaInterface): Observable<DespesaInterface> {
-    return this.httpClient.put<DespesaInterface>(
-      `${environment.apiUrl}/despesas/${despesa.id}`,
-      despesa
-    )
+    return this.httpClient.put<DespesaInterface>(`${environment.apiUrl}/despesa/${despesa.id}`,despesa);
   }
 
   create(despesa: DespesaInterface): Observable<DespesaInterface> {
-    return this.httpClient.post<DespesaInterface>(
-      `${environment.apiUrl}/despesas`,
-      despesa
-    );
+    return this.httpClient.post<DespesaInterface>(`${environment.apiUrl}/despesa`, despesa);
   }
 
-  delete(id: String): Observable<DespesaInterface> {
-    return this.httpClient.delete<DespesaInterface>(`${environment.apiUrl}/despesas/${id}`);
+  delete(despesa: DespesaInterface):Observable<void>{
+    return this.httpClient.delete<void>(`${environment.apiUrl}/despesa/${despesa.id}`);
   }
 }

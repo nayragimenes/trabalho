@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { DespesaRoutingModule } from './despesa-routing.module';
 import { DespesaCadastroComponent } from './components/cadastro/despesa-cadastro/despesa-cadastro.component';
 import { DespesaService } from './services/despesa.service';
+import { UsuarioService } from '../usuario/services/usuario.service';
 
 
 @NgModule({
@@ -16,10 +17,9 @@ import { DespesaService } from './services/despesa.service';
     IonicModule, 
     FormsModule, 
     ReactiveFormsModule, 
-    DespesaRoutingModule
+    DespesaRoutingModule,
   ],
   declarations: [DespesaCadastroComponent],
-  providers: [DespesaService]
+  providers: [DespesaService, UsuarioService],
 })
-
 export class DespesaModule { }
