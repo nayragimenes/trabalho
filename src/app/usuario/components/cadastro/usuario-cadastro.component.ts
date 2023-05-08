@@ -2,50 +2,59 @@ import { Component, Input, NgModule, OnDestroy, OnInit } from '@angular/core';
 import { UsuarioService } from '../../services/usuario.service';
 import { Subscription } from 'rxjs';
 import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
-import { AlertController, LoadingController } from '@ionic/angular';
+import { AlertController, LoadingController, ModalController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UsuarioInterface } from '../../types/usuario.interface';
 
 @Component({
   selector: 'app-usuario-cadastro',
   templateUrl: './usuario-cadastro.component.html',
 })
 
-export class UsuarioCadastroComponent implements OnInit, OnDestroy {
+export class UsuarioCadastroComponent implements OnInit {
+  @Input()
+  usuario = {} as UsuarioInterface;
+  name!: string;
   usuarioForm!: FormGroup;
   subscriptions = new Subscription();
-  createMode: boolean = false;
-  editMode: boolean = false;
-  id!: number
   
   constructor(
-    private activateRoute: ActivatedRoute,
-    private router: Router,
+    private modalCtrl: ModalController,
     private formBuilder: FormBuilder,
     private usuarioService: UsuarioService,
-    private alertController: AlertController,
-    private loadingController: LoadingController) 
-  { }
-     
+    private alertController: AlertController) {}
+
+
   ngOnInit(): void {
-    this.inicializaFormulario();
-    this.loadUsuarioOnEditMode();
+    this.usuarioForm = this.formBuilder.group({
+      nome: [this.usuario?.nome ? this.usuario.nome : '', [Validators.required, Validators.maxLength(250)]],
+      apelido: [this.usuario?.apelido ? this.usuario.apelido : '', [Validators.required, Validators.maxLength(250)]],
+      email: [this.usuario?.email ? this.usuario.apelido : ' ',Validators.email],
+      nascimento: [this.usuario?.nascimento ? this.usuario.nascimento : '2000-01-01', Validators.required],
+      genero: this.usuario?.genero ? this.usuario.genero : '',
+    })
+
+
+    //this.inicializaFormulario();
+    //this.loadUsuarioOnEditMode();
   }
+
+
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe()
   }
 
-  // INICIALIZA FORMULARIO
-  inicializaFormulario() {
+/*   inicializaFormulario() {
     this.usuarioForm = this.formBuilder.group({
-      nome:       ['Nome',[Validators.required, Validators.maxLength(80)]],
-      apelido:    ['Apelido',[Validators.required, Validators.maxLength(80)]],
-      email:      ['nomequalquer@mailto.com',Validators.email],
-      nascimento: ['2000-01-01', this.validMinAge()],
-      gender: 'M',
+      nome: [this.usuario?.nome ? this.usuario.nome : '', [Validators.required, Validators.maxLength(250)]],
+      apelido: [this.usuario?.apelido ? this.usuario.apelido : '', [Validators.required, Validators.maxLength(250)]],
+      email: [this.usuario?.email ? this.usuario.apelido : ' ',Validators.email],
+      nascimento: [this.usuario?.nascimento ? this.usuario.nascimento : ' ', this.validaIdade()],
+      genero: this.usuario?.genero ? this.usuario.genero : '',
     })
-  }
+  } */
 
-  private async loadUsuarioOnEditMode(){
+/*   private async loadUsuarioOnEditMode(){
     const [url] = this.activateRoute.snapshot.url;
     this.editMode = url.path === 'edit';
     this.createMode = !this.editMode;
@@ -70,10 +79,10 @@ export class UsuarioCadastroComponent implements OnInit, OnDestroy {
         busyLoader.dismiss()
       }
     }
-  }
+  } */
 
-  //VALIDA IDADE
-  validMinAge(): ValidatorFn {
+
+  validaIdade(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const minute = 1000 * 60;
       const hour = minute * 60;
@@ -91,9 +100,78 @@ export class UsuarioCadastroComponent implements OnInit, OnDestroy {
     };
   }
 
-  cancel():void{
-    this.router.navigate(['./usuario'])
+  cancel() {
+    return this.modalCtrl.dismiss(null, 'cancel');
   }
+
+  confirm(): void {
+    if(this.usuario?.id) {
+      this.updateUsuario(this.usuarioForm.value)
+    } else {
+      this.createUsuario(this.usuarioForm.value)
+    }
+  }
+
+  createUsuario(usuario: UsuarioInterface): void {
+    this.subscriptions.add(
+      this.usuarioService.create(usuario).subscribe(
+        () => {
+          this.modalCtrl.dismiss(usuario, 'confirm');
+        },
+        async () => {
+          const alerta = await this.alertController.create({
+            header: 'Erro',
+            message: 'Não foi possível salvar os dados do cliente',
+            buttons: ['Ok']
+          })
+          alerta.present()
+        }
+      )
+    )
+  }
+
+  updateUsuario(usuario: UsuarioInterface): void {
+    this.subscriptions.add(
+      this.usuarioService.update(usuario, this.usuario.id).subscribe(
+        () => {
+          this.modalCtrl.dismiss(usuario, 'confirm');
+        },
+        async () => {
+          const alerta = await this.alertController.create({
+            header: 'Erro',
+            message: 'Não foi possível atualizar os dados',
+            buttons: ['Ok']
+          })
+          alerta.present()
+        }
+      )
+    )
+  }
+
+  deleteUsuario(usuarioId: string): void {
+    this.subscriptions.add(
+      this.usuarioService.delete(usuarioId).subscribe(
+        () => {
+          this.modalCtrl.dismiss(usuarioId, 'confirm');
+        },
+        async () => {
+          const alerta = await this.alertController.create({
+            header: 'Erro',
+            message: 'Não foi possível deletar os dados do cliente',
+            buttons: ['Ok']
+          })
+          alerta.present()
+        }
+      )
+    )
+  }
+
+
+
+
+/*   cancel():void{
+    this.router.navigate(['./usuario'])
+  } */
 
 /*   confirm(): void {
     if(this.usuario?.id) {
@@ -104,7 +182,7 @@ export class UsuarioCadastroComponent implements OnInit, OnDestroy {
   }
  */
   // SALVA USUARIO
-  create(): void {
+/*   create(): void {
     if(this.createMode){
       this.subscriptions.add(
         this.usuarioService.create(this.usuarioForm.value).subscribe(
@@ -139,7 +217,11 @@ export class UsuarioCadastroComponent implements OnInit, OnDestroy {
         }
       })
     }
-  }
+  } */
+
+
+
+  
 
 /*   updateUsuario(usuario: UsuarioInterface): void {
     this.subscriptions.add(

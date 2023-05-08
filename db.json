@@ -1,19 +1,46 @@
 {
-  "posts": [
+  "usuario": [
     {
       "id": 1,
-      "title": "json-server",
-      "author": "typicode"
+      "nome": "json-server",
+      "apelido": "typicode",
+      "email": "teste@gmail.com",
+      "nascimento": "1963-12-18",
+      "genero": "F"
+    },
+    {
+      "nome": "teste",
+      "apelido": "teste",
+      "email": "nayragimenes@gmail.com",
+      "nascimento": "2000-01-01",
+      "genero": "F",
+      "id": 2
+    },
+    {
+      "nome": "teste",
+      "apelido": "teste",
+      "email": "nayragimenes@gmail.com",
+      "nascimento": "2000-01-01",
+      "genero": "F",
+      "id": 3
     }
   ],
-  "comments": [
+  "despesa": [
     {
       "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "descricao": "some comment",
+      "categoria": "OUTRA",
+      "data": "1963-12-18",
+      "valor": 10,
+      "usuarioId": 1
     }
   ],
-  "profile": {
-    "name": "typicode"
+  "tarefa": {
+    "id": 1,
+    "descricao": "some comment",
+    "prioridade": "NORMAL",
+    "dataInicial": "1963-12-18",
+    "dataFinal": "1963-12-18",
+    "usuarioId": 1
   }
 }

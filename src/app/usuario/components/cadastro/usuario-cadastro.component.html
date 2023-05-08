@@ -1,61 +1,72 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>      
     </ion-buttons>
     <ion-title>
-      {{createMode ? 'Cadastro' : 'Edição'}} Usuarios
+      {{createMode ? 'Cadastro' : 'Edição'}} teste
     </ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Cadastro</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
+
   <form [formGroup]="usuarioForm">
     <ion-list>
       <ion-item>
-        <ion-label position="floating">Nome:</ion-label>
+        <ion-label>Nome:</ion-label>
         <ion-input formControlName="nome" placeholder=" "></ion-input>
         <ion-note slot="error" *ngIf="usuarioForm.controls['nome'].hasError('required')">O campo nome é obrigatório!</ion-note>
         <ion-note slot="error" *ngIf="usuarioForm.controls['nome'].hasError('maxlength')">O campo no deve conter até {{usuarioForm.controls['nome'].errors?.['maxlength'].requiredLength}} caracteres!</ion-note>
       </ion-item>
 
       <ion-item>
-        <ion-label position="floating">Apelido:</ion-label>
+        <ion-label>Apelido:</ion-label>
         <ion-input formControlName="apelido" placeholder=" "></ion-input>
         <ion-note slot="error" *ngIf="usuarioForm.controls['apelido'].hasError('required')">O campo nome é obrigatório!</ion-note>
         <ion-note slot="error" *ngIf="usuarioForm.controls['apelido'].hasError('maxlength')">O campo no deve conter até {{usuarioForm.controls['apelido'].errors?.['maxlength'].requiredLength}} caracteres!</ion-note>
       </ion-item>
 
       <ion-item>
-        <ion-label position="floating">E-mail:</ion-label>
+        <ion-label>E-mail:</ion-label>
         <ion-input formControlName="email" placeholder=" "></ion-input>
         <ion-note slot="error" *ngIf="usuarioForm.controls['email'].hasError('email')">Endereço de e-mail inválido!</ion-note>
       </ion-item>
 
       <ion-item>
-        <ion-label position="floating">Nascimento:</ion-label>
+        <ion-label> Nascimento </ion-label>
         <ion-datetime-button datetime="nascimento"></ion-datetime-button>
         <ion-modal [keepContentsMounted]="true">
           <ng-template>
-            <ion-datetime formControlName="nascimento" id="nascimento" presentation="date" showDefaultButtons="true" doneText="Selecionar" cancelText="cancelar" showDafaultTitle="true">
-              <span slot="title"></span>
-            </ion-datetime>  
+            <ion-datetime formControlName="nascimento" id="nascimento" presentation="date" showDefaultButtons="true" 
+            doneText="Selecionar" cancelText="Cancelar" showDefaultTitle="true">
+              <span slot="title">Selecione a data de Nascimento</span>
+            </ion-datetime>
           </ng-template>
         </ion-modal>
-        <ion-note slot="error" *ngIf="usuarioForm.controls['nascimento'].hasError('validMinAge')">Idade invalida</ion-note>
-      </ion-item>        
+        <ion-note slot="error" *ngIf="usuarioForm.controls['nascimento'].hasError('required')">
+          O campo é obrigatório
+        </ion-note>
+      </ion-item>     
 
       <ion-item>
-        <ion-label position="floating">Gênero:</ion-label>
+        <ion-label>Gênero:</ion-label>
         <ion-select formControlName="genero" placeholder="Selecione o seu gênero">
           <ion-select-option value="F">Feminino</ion-select-option>
           <ion-select-option value="M">Masculino</ion-select-option>
           <ion-select-option value="O">Outro</ion-select-option>
         </ion-select>
       </ion-item>
+
     </ion-list>
 
-    <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+<!--     <ion-fab horizontal="end" vertical="bottom" slot="fixed">
         <ion-fab-button (click)="create()" [disabled]="usuarioForm.invalid">
           <ion-icon name="save"></ion-icon>
         </ion-fab-button>
@@ -65,7 +76,21 @@
       <ion-fab-button color="light" (click)="cancel()">
         <ion-icon name="close-circle"></ion-icon>
       </ion-fab-button>
-    </ion-fab>
-
+    </ion-fab> -->
   </form>
+
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="medium" (click)="cancel()">Cancelar</ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button *ngIf="usuario?.id" (click)="deleteUsuario(usuario.id)" [strong]="true" color="danger">Excluir</ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="confirm()" [strong]="true" [disabled]="usuarioForm.invalid" color="primary">Salvar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
