@@ -12,7 +12,7 @@ import { UsuarioCadastroComponent } from '../../cadastro/usuario-cadastro.compon
 
 export class UsuarioListaComponent implements OnInit {
 
-  usuarios: UsuarioInterface[] = [];
+  usuario: UsuarioInterface[] = [];
   subscriptions = new Subscription();
   
   constructor(
@@ -29,32 +29,34 @@ export class UsuarioListaComponent implements OnInit {
   async readUsuarios() {
     const busyLoader = await this.loadingController.create({ spinner: 'circular' })
     busyLoader.present()
-    const subscription = this.usuarioService.readUsuarios()
-      .subscribe(async (usuarios) => {
-        window.localStorage.setItem('usuarios', JSON.stringify(usuarios));
-        this.usuarios = usuarios;
-        const toast = await this.toastController.create({
-          color: 'success',
-          position: 'top',
-          message: 'Lista de usuarios carregada com sucesso!',
-          duration: 1500,
-          buttons: ['X']
-        })
-        toast.present()
-        busyLoader.dismiss();
-      }, async () => {
-        const alerta = await this.alertController.create({
-          header: 'Erro',
-          message: 'Não foi possível carregar a lista de usuarios',
-          buttons: ['Ok']
-        })
-        alerta.present()
-        busyLoader.dismiss();
-      });
+
+    const subscription = this.usuarioService.readUsuarios().subscribe(async (usuario) => {
+      window.localStorage.setItem('usuario', JSON.stringify(usuario));
+      this.usuario = usuario;
+      const toast = await this.toastController.create({
+        color: 'success',
+        position: 'top',
+        message: 'Lista de usuarios carregada com sucesso!',
+        duration: 1500,
+        buttons: ['X']
+      })
+      toast.present()
+      busyLoader.dismiss();
+    }, 
+    
+    async () => {
+      const alerta = await this.alertController.create({
+        header: 'Erro',
+        message: 'Não foi possível carregar a lista de usuarios',
+        buttons: ['Ok']
+      })
+      alerta.present()
+      busyLoader.dismiss();
+    });
     this.subscriptions.add(subscription);
   }
 
-  async openModal(usuario: null | UsuarioInterface) {
+  async openModal(usuario: null|UsuarioInterface) {
     const modal = await this.modalCtrl.create({
       component: UsuarioCadastroComponent,
       componentProps: {

@@ -12,7 +12,6 @@ const routes: Route[] = [
     path: 'cadastro',
     component: DespesaCadastroComponent,
   }
-
 ]
 
 @NgModule({

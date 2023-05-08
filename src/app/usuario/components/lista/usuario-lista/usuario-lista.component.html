@@ -5,19 +5,22 @@
 </ion-header>
   
 <ion-content class="ion-padding">
-    <ion-card *ngFor="let usuario of usuarios" (click)="openModal(usuario)" class="ion-activatable ripple-parent rounded-rectangle">
-      <ion-ripple-effect></ion-ripple-effect>
-      <ion-card-header>
-        <ion-card-title>{{usuario.nome}}</ion-card-title>
-        <ion-card-title>{{usuario.apelido}}</ion-card-title>
-        <ion-card-title>{{usuario.email}}</ion-card-title>
-        <ion-card-subtitle>Nascimento: {{usuario.nascimento | date: 'dd/MM/yyyy' }}</ion-card-subtitle>
-        <ion-card-title>{{usuario.genero}}</ion-card-title>
-      </ion-card-header>
-    </ion-card>
-    <ion-fab vertical="bottom" horizontal="end">
-      <ion-fab-button (click)="openModal(null)">
-        <ion-icon name="add"></ion-icon>
-      </ion-fab-button>
-    </ion-fab>
+
+  <ion-card *ngFor="let usuario of usuario" (click)="openModal(usuario)" class="ion-activatable ripple-parent rounded-rectangle">
+    <ion-ripple-effect></ion-ripple-effect>
+    <ion-card-header>
+      <ion-card-title>{{usuario.nome}}</ion-card-title>
+      <ion-card-title>{{usuario.apelido}}</ion-card-title>
+      <ion-card-title>{{usuario.email}}</ion-card-title>
+      <ion-card-subtitle>Nascimento: {{usuario.nascimento | date: 'dd/MM/yyyy' }}</ion-card-subtitle>
+      <ion-card-title>{{usuario.genero}}</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-fab vertical="bottom" horizontal="end">
+    <ion-fab-button (click)="openModal(null)">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
 </ion-content>

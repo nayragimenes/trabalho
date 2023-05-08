@@ -1,19 +1,19 @@
 {
   "usuario": [
     {
-      "id": 1,
-      "nome": "json-server",
-      "apelido": "typicode",
-      "email": "teste@gmail.com",
-      "nascimento": "1963-12-18",
-      "genero": "F"
+      "nome": "Ian",
+      "apelido": "Pancinha",
+      "email": "pancinha@gmail.com",
+      "nascimento": "2020-02-26",
+      "genero": "M",
+      "id": 1
     },
     {
-      "nome": "teste",
-      "apelido": "teste",
-      "email": "nayragimenes@gmail.com",
+      "nome": "teste1",
+      "apelido": "teste1",
+      "email": "teste@gmail.com",
       "nascimento": "2000-01-01",
-      "genero": "F",
+      "genero": "O",
       "id": 2
     },
     {

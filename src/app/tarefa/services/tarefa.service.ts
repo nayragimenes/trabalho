@@ -20,7 +20,7 @@ export class TarefaService {
   save(tarefa: TarefaInterface): Observable<TarefaInterface> {
     return this.httpClient.post<TarefaInterface>(`${environment.apiUrl}/tarefa`, tarefa);
   }
-  remove(tarefa: TarefaInterface):Observable<void> {
-    return this.httpClient.delete<void>(`${environment.apiUrl}/tarefa/${tarefa.id}`)
-  }
+  delete(id: String): Observable<TarefaInterface> {
+    return this.httpClient.delete<TarefaInterface>(`${environment.apiUrl}/tarefa/${id}`);
+}
 }

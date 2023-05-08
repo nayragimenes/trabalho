@@ -6,7 +6,7 @@ import { UsuarioListaComponent } from './components/lista/usuario-lista/usuario-
 const routes: Route[] = [
   {
     path: '',
-    redirectTo: 'cadastro',
+    redirectTo: 'lista',
     pathMatch: 'full'
   },
   {

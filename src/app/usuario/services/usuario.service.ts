@@ -30,6 +30,6 @@ export class UsuarioService{
 
     delete(id: String): Observable<UsuarioInterface> {
         return this.httpClient.delete<UsuarioInterface>(`${environment.apiUrl}/usuario/${id}`);
-      }
+    }
 
 }
