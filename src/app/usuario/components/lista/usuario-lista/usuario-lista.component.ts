@@ -30,6 +30,7 @@ export class UsuarioListaComponent implements OnInit {
     const busyLoader = await this.loadingController.create({ spinner: 'circular' })
     busyLoader.present()
 
+    //CONSULTA NO JSON E MENSAGEM 
     const subscription = this.usuarioService.readUsuarios().subscribe(async (usuario) => {
       window.localStorage.setItem('usuario', JSON.stringify(usuario));
       this.usuario = usuario;
@@ -44,6 +45,7 @@ export class UsuarioListaComponent implements OnInit {
       busyLoader.dismiss();
     }, 
     
+    //MENSAGEM DA TELA
     async () => {
       const alerta = await this.alertController.create({
         header: 'Erro',
@@ -56,6 +58,7 @@ export class UsuarioListaComponent implements OnInit {
     this.subscriptions.add(subscription);
   }
 
+  //BOTÃO DE INSERIR
   async openModal(usuario: null|UsuarioInterface) {
     const modal = await this.modalCtrl.create({
       component: UsuarioCadastroComponent,

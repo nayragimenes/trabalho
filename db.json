@@ -1,28 +1,12 @@
 {
   "usuario": [
     {
-      "nome": "Ian",
-      "apelido": "Pancinha",
-      "email": "pancinha@gmail.com",
-      "nascimento": "2020-02-26",
-      "genero": "M",
-      "id": 1
-    },
-    {
-      "nome": "teste1",
-      "apelido": "teste1",
-      "email": "teste@gmail.com",
-      "nascimento": "2000-01-01",
-      "genero": "O",
-      "id": 2
-    },
-    {
-      "nome": "teste",
-      "apelido": "teste",
-      "email": "nayragimenes@gmail.com",
-      "nascimento": "2000-01-01",
+      "nome": "nayra regina gimenes",
+      "apelido": "nayra",
+      "email": "testeteste@gmail.com",
+      "nascimento": "1983-09-13",
       "genero": "F",
-      "id": 3
+      "id": 4
     }
   ],
   "despesa": [

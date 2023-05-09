@@ -5,15 +5,14 @@
 </ion-header>
   
 <ion-content class="ion-padding">
-
   <ion-card *ngFor="let usuario of usuario" (click)="openModal(usuario)" class="ion-activatable ripple-parent rounded-rectangle">
     <ion-ripple-effect></ion-ripple-effect>
     <ion-card-header>
-      <ion-card-title>{{usuario.nome}}</ion-card-title>
-      <ion-card-title>{{usuario.apelido}}</ion-card-title>
-      <ion-card-title>{{usuario.email}}</ion-card-title>
+      <ion-card-title color="primary">{{usuario.nome}}</ion-card-title>
+      <ion-card-title>Apelido: {{usuario.apelido}}</ion-card-title>
+      <ion-card-title>E-mail: {{usuario.email}}</ion-card-title>
       <ion-card-subtitle>Nascimento: {{usuario.nascimento | date: 'dd/MM/yyyy' }}</ion-card-subtitle>
-      <ion-card-title>{{usuario.genero}}</ion-card-title>
+      <ion-card-title>Gênero: {{usuario.genero}}</ion-card-title>
     </ion-card-header>
   </ion-card>
 

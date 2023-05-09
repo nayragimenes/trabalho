@@ -4,17 +4,17 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
+
   <form [formGroup]="despesaForm">
     <ion-list>
-
       <ion-item>
-        <ion-label position="floating">Descrição</ion-label>
+        <ion-label>Descrição</ion-label>
         <ion-textarea formControlName="descricao" placeholder=" " [autoGrow]="true" rows="10"></ion-textarea>
       </ion-item>
 
       <ion-item>
-        <ion-label position="floating">Categoria:</ion-label>
+        <ion-label>Categoria:</ion-label>
         <ion-select formControlName="categoria" placeholder=" ">
           <ion-select-option value="OUTRAS">Outras</ion-select-option>
           <ion-select-option value="ALIMENTACAO">Alimentação</ion-select-option>
@@ -34,7 +34,7 @@
           </ng-template>
         </ion-modal>
         <ion-note slot="error" *ngIf="despesaForm.controls['data'].hasError('required')">
-          O campo é obrigatório
+          Campo obrigatório
         </ion-note>
       </ion-item>
 
@@ -43,7 +43,7 @@
         <ion-label>Valor</ion-label>
         <ion-input formControlName="valor" placeholder="valor" type="number"></ion-input>
         <ion-note slot="error" *ngIf="despesaForm.controls['valor'].hasError('required')">
-          O campo é obrigatório
+          Campo obrigatório
         </ion-note>
       </ion-item>
 
@@ -58,8 +58,10 @@
           Informe o digito da conta com um hífen, nesse formato 00000-00
         </ion-note>
       </ion-item>  
+
     </ion-list>
   </form>
+</ion-content>
 
 <ion-footer>
   <ion-toolbar>
