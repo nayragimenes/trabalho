@@ -17,6 +17,22 @@
       "data": "1963-12-18",
       "valor": 10,
       "usuarioId": 1
+    },
+    {
+      "descricao": "",
+      "categoria": "",
+      "data": "2000-01-01",
+      "valor": " ",
+      "usuario": "",
+      "id": 2
+    },
+    {
+      "descricao": "",
+      "categoria": "",
+      "data": "2000-01-01",
+      "valor": " ",
+      "usuario": "",
+      "id": 3
     }
   ],
   "tarefa": {

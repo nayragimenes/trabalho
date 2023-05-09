@@ -19,7 +19,6 @@ export class DespesaCadastroComponent implements OnInit {
   @Input()
   despesa = {} as DespesaInterface;
 
-
   despesaForm!: FormGroup;
   subscriptions = new Subscription();
   
@@ -66,7 +65,7 @@ export class DespesaCadastroComponent implements OnInit {
         async () => {
           const alerta = await this.alertController.create({
             header: 'Erro',
-            message: 'Não foi possível salvar os dados do cliente',
+            message: 'Não foi possível salvar os dados',
             buttons: ['Ok']
           })
           alerta.present()
@@ -102,7 +101,7 @@ export class DespesaCadastroComponent implements OnInit {
         async () => {
           const alerta = await this.alertController.create({
             header: 'Erro',
-            message: 'Não foi possível deletar os dados do cliente',
+            message: 'Não foi possível deletar os dados',
             buttons: ['Ok']
           })
           alerta.present()

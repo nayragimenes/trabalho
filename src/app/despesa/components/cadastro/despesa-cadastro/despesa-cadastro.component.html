@@ -5,16 +5,15 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-
   <form [formGroup]="despesaForm">
     <ion-list>
+      <ion-card-subtitle>Descricao</ion-card-subtitle> 
       <ion-item>
-        <ion-label>Descrição</ion-label>
         <ion-textarea formControlName="descricao" placeholder=" " [autoGrow]="true" rows="10"></ion-textarea>
       </ion-item>
 
       <ion-item>
-        <ion-label>Categoria:</ion-label>
+        <ion-card-subtitle>Categoria</ion-card-subtitle>
         <ion-select formControlName="categoria" placeholder=" ">
           <ion-select-option value="OUTRAS">Outras</ion-select-option>
           <ion-select-option value="ALIMENTACAO">Alimentação</ion-select-option>
@@ -29,18 +28,18 @@
           <ng-template>
             <ion-datetime formControlName="data" id="data" presentation="date" showDefaultButtons="true" 
             doneText="Selecionar" cancelText="Cancelar" showDefaultTitle="true">
-              <span slot="title">Data</span>
+              <span slot="title">Selecione a data</span>
             </ion-datetime>
           </ng-template>
         </ion-modal>
-        <ion-note slot="error" *ngIf="despesaForm.controls['data'].hasError('required')">
-          Campo obrigatório
+        <ion-note slot="error" *ngIf="despesaForm.controls['dataNascimento'].hasError('required')">
+          O campo é obrigatório
         </ion-note>
       </ion-item>
 
 
       <ion-item>
-        <ion-label>Valor</ion-label>
+        <ion-card-subtitle>Valor</ion-card-subtitle>
         <ion-input formControlName="valor" placeholder="valor" type="number"></ion-input>
         <ion-note slot="error" *ngIf="despesaForm.controls['valor'].hasError('required')">
           Campo obrigatório
@@ -55,7 +54,6 @@
           O campo é obrigatório
         </ion-note>
         <ion-note slot="error" *ngIf="despesaForm.controls['despesa'].hasError('invalidDespesa')">
-          Informe o digito da conta com um hífen, nesse formato 00000-00
         </ion-note>
       </ion-item>  
 

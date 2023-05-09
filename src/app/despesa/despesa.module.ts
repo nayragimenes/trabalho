@@ -8,6 +8,7 @@ import { DespesaRoutingModule } from './despesa-routing.module';
 import { DespesaService } from './services/despesa.service';
 import { UsuarioService } from '../usuario/services/usuario.service';
 import { DespesaCadastroComponent } from './components/cadastro/despesa-cadastro/despesa-cadastro.component';
+import { DespesaListaComponent } from './components/lista/despesa-lista.component';
 
 
 @NgModule({
@@ -19,7 +20,7 @@ import { DespesaCadastroComponent } from './components/cadastro/despesa-cadastro
     ReactiveFormsModule, 
     DespesaRoutingModule,
   ],
-  declarations: [DespesaCadastroComponent],
+  declarations: [DespesaCadastroComponent, DespesaListaComponent],
   providers: [DespesaService, UsuarioService],
 })
 export class DespesaModule { }

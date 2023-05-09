@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Despesas</ion-title>
+  </ion-toolbar>
+</ion-header>
+  
+<ion-content class="ion-padding">
+  <ion-card *ngFor="let despesa of despesa" (click)="openModal(despesa)" class="ion-activatable ripple-parent rounded-rectangle">
+    <ion-ripple-effect></ion-ripple-effect>
+    <ion-card-header>
+      <ion-card-title color="primary">{{despesa.descricao}}</ion-card-title>
+      <ion-card-title>Categoria: {{despesa.categoria}}</ion-card-title>
+      <ion-card-subtitle>Data: {{despesa.data | date: 'dd/MM/yyyy' }}</ion-card-subtitle>
+      <ion-card-title>Valor: {{despesa.valor}}</ion-card-title>
+      <ion-card-title>Usuario: {{despesa.usuario}}</ion-card-title>
+
+    </ion-card-header>
+  </ion-card>
+
+  <ion-fab vertical="bottom" horizontal="end">
+    <ion-fab-button (click)="openModal(null)">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>
