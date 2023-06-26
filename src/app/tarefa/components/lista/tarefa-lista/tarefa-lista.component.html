@@ -1,5 +1,27 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Usuarios</ion-title>
+    <ion-title>Tarefas</ion-title>
   </ion-toolbar>
 </ion-header>
+  
+<ion-content class="ion-padding">
+  <ion-card *ngFor="let tarefa of tarefa" (click)="openModal(tarefa)" class="ion-activatable ripple-parent rounded-rectangle">
+    <ion-ripple-effect></ion-ripple-effect>
+    <ion-card-header>
+      <ion-card-title color="primary">{{tarefa.descricao}}</ion-card-title>
+      <ion-card-title>Descricao: {{tarefa.descricao}}</ion-card-title>
+      <ion-card-title>Prioridade: {{tarefa.prioridade}}</ion-card-title>
+      <ion-card-subtitle>DataInicial: {{tarefa.dataInicial | date: 'dd/MM/yyyy' }}</ion-card-subtitle>
+      <ion-card-subtitle>DataFinal: {{tarefa.dataFinal | date: 'dd/MM/yyyy' }}</ion-card-subtitle>
+      <ion-card-title>Usuario: {{tarefa.usuario}}</ion-card-title>
+
+    </ion-card-header>
+  </ion-card>
+
+  <ion-fab vertical="bottom" horizontal="end">
+    <ion-fab-button (click)="openModal(null)">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>

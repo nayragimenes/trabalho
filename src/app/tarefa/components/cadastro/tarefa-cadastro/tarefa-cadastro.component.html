@@ -1,3 +1,78 @@
-<p>
-  tarefa-cadastro works!
-</p>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Cadastro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <form [formGroup]="tarefaForm">
+    <ion-list>
+      <ion-item>
+        <ion-label>Descricao:</ion-label>
+        <ion-input formControlName="descricao" placeholder=" "></ion-input>
+        <ion-note slot="error" *ngIf="tarefaForm.controls['descricao'].hasError('required')">Campo obrigatório!</ion-note>
+        <ion-note slot="error" *ngIf="tarefaForm.controls['descricao'].hasError('maxlength')">O campo no deve conter até {{tarefaForm.controls['nome'].errors?.['maxlength'].requiredLength}} caracteres!</ion-note>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Prioridade:</ion-label>
+        <ion-select formControlName="prioridade" placeholder="Selecione">
+          <ion-select-option value="NORMAL">Normal</ion-select-option>
+          <ion-select-option value="IMPORTANTE">Importante</ion-select-option>
+          <ion-select-option value="URGENTE">Urgente</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+
+
+      <ion-item>
+        <ion-label> dataInicial </ion-label>
+        <ion-datetime-button datetime="dataInicial"></ion-datetime-button>
+        <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime formControlName="dataInicial" id="dataInicial" presentation="date" showDefaultButtons="true" 
+            doneText="Selecionar" cancelText="Cancelar" showDefaultTitle="true">
+              <span slot="title">Selecione a data</span>
+            </ion-datetime>
+          </ng-template>
+        </ion-modal>
+        <ion-note slot="error" *ngIf="tarefaForm.controls['dataInicial'].hasError('required')">
+          O campo é obrigatório
+        </ion-note>
+      </ion-item>      
+
+
+      <ion-item>
+        <ion-label> Data Final </ion-label>
+        <ion-datetime-button datetime="dataFinal"></ion-datetime-button>
+        <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime formControlName="dataFinal" id="dataFinal" presentation="date" showDefaultButtons="true" 
+            doneText="Selecionar" cancelText="Cancelar" showDefaultTitle="true">
+              <span slot="title">Selecione</span>
+            </ion-datetime>
+          </ng-template>
+        </ion-modal>
+        <ion-note slot="error" *ngIf="tarefaForm.controls['dataFinal'].hasError('required')">
+          O campo é obrigatório
+        </ion-note>
+      </ion-item> 
+
+    </ion-list>
+  </form>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="medium" (click)="cancel()">Cancelar</ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button *ngIf="tarefa?.id" (click)="deleteTarefa(tarefa.descricao)" [strong]="true" color="danger">Excluir</ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="confirm()" [strong]="true" [disabled]="tarefaForm.invalid" color="primary">Salvar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

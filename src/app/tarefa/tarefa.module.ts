@@ -9,8 +9,16 @@ import { TarefaListaComponent } from './components/lista/tarefa-lista/tarefa-lis
 import { TarefaService } from './services/tarefa.service';
 
 @NgModule({
-  imports: [CommonModule, HttpClientModule, FormsModule, IonicModule, ReactiveFormsModule, TarefaRoutingModule],
+  imports: [
+    CommonModule, 
+    HttpClientModule, 
+    IonicModule, 
+    FormsModule, 
+    ReactiveFormsModule, 
+    TarefaRoutingModule
+  ],
   declarations: [TarefaCadastroComponent, TarefaListaComponent],
   providers: [TarefaService]
+
 })
 export class TarefaModule {}

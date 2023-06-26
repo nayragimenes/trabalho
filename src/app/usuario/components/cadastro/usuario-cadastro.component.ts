@@ -79,7 +79,7 @@ export class UsuarioCadastroComponent implements OnInit {
         async () => {
           const alerta = await this.alertController.create({
             header: 'Erro',
-            message: 'Não foi possível salvar os dados do cliente',
+            message: 'Não foi possível salvar os dados',
             buttons: ['Ok']
           })
           alerta.present()
